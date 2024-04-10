@@ -8,9 +8,9 @@ public class PlayerMovement : MonoBehaviour
 
     private CharacterController controller;
     private Vector3 playerVelocity;
-    private bool groundedPlayer;
     private float playerSpeed = 2.0f;
-    private float jumpHeight = 1.0f;
+    private int playerTrack = 0;    //there are 4 tracks (0-3) in which the player can choose to run
+    private bool groundedPlayer;
     private float gravityValue = -9.81f;
 
     private void Start()
@@ -19,26 +19,38 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
+        
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
         }
 
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        //player will have a constant movement forward and will only be able to move left or right 
+        //if the player uses left or right keys, they will move to the corresponding track, if possible
+        if(Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) {
+            if(playerTrack < 3) {
+                playerTrack++;
+                controller.Move(new Vector3(5.0f, 0, 0));
+            }
+
+        } else if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) {
+            if(playerTrack > 0) {
+                playerTrack--;
+                controller.Move(new Vector3(-5.0f, 0, 0));
+            }
+
+        }
+
+        Vector3 move = new Vector3(0, 0, playerSpeed);
+
         controller.Move(move * Time.deltaTime * playerSpeed);
 
         if (move != Vector3.zero)
         {
             gameObject.transform.forward = move;
         }
-
-        // Changes the height position of the player..
-        // if (Input.GetKeyDown(KeyCode.Space) && groundedPlayer)
-        // {
-        //     playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-        // }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
