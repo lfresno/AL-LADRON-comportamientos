@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,11 @@ public class PlayerMovement : MonoBehaviour
 
     private CharacterController controller;
     private Vector3 playerVelocity;
+    
+    [SerializeField]
     private float playerSpeed = 2.0f;
+    private float speedIncrement = 1.0f;
+    private float lastIncrement;
     private int playerTrack = 0;    //there are 4 tracks (0-3) in which the player can choose to run
     private bool groundedPlayer;
     private float gravityValue = -9.81f;
@@ -16,10 +21,21 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         controller = gameObject.AddComponent<CharacterController>();
+        lastIncrement = Time.time;
     }
 
     void Update()
     {   
+        Debug.Log(Time.time);
+        //speed is incremented every 0.5 seconds
+        //the increment in speed is greater at the beggining of the game, so that it gets difficult fast, but not too much
+        if(Time.time - lastIncrement > 0.5f) {
+            if(Time.time < 2.0f){
+            speedIncrement += 0.05f;
+            } else {
+                speedIncrement += 0.035f;
+            }
+        }
         
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
@@ -43,13 +59,13 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-        Vector3 move = new Vector3(0, 0, playerSpeed);
+        Vector3 direction = new Vector3(0, 0, 1);
 
-        controller.Move(move * Time.deltaTime * playerSpeed);
+        controller.Move(direction * Time.deltaTime * (playerSpeed + speedIncrement));
 
-        if (move != Vector3.zero)
+        if (direction != Vector3.zero)
         {
-            gameObject.transform.forward = move;
+            gameObject.transform.forward = direction;
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
