@@ -22,13 +22,10 @@ public class UIManager : MonoBehaviour
 
     public void MenuActive( bool active) {
         menuCanvas.SetActive(active);
-        // startButton.interactable = active;
     }
 
     public void EndMenuActive( bool active) {
         endCanvas.SetActive(active);
-        // restartButton.interactable = active;
-        // quitButton.interactable = active;
     }
 
 

@@ -26,8 +26,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(player.life <=0){
-            UpdateGameState(GameState.EndState);
+        if((player.life <=0) || Input.GetKeyDown(KeyCode.Escape)){
+            UpdateGameState(GameState.PauseState);
         }
     }
 
@@ -36,20 +36,20 @@ public class GameManager : MonoBehaviour
 
         switch(newState) {
             case GameState.MenuState:
-                // SceneManager.LoadScene(0);
+                Time.timeScale = 0f;
                 UIManager.Instance.MenuActive(true);
                 UIManager.Instance.EndMenuActive(false);
                 break;
             
             case GameState.GameState:
-                // SceneManager.LoadScene(1);
+                Time.timeScale = 1.0f;
                 player.ResetPlayer();
                 UIManager.Instance.MenuActive(false);
                 UIManager.Instance.EndMenuActive(false);
                 break;
 
-            case GameState.EndState:
-                // SceneManager.LoadScene(2);
+            case GameState.PauseState:
+                Time.timeScale = 0f;
                 UIManager.Instance.MenuActive(false);
                 UIManager.Instance.EndMenuActive(true);
                 break;
@@ -63,5 +63,5 @@ public class GameManager : MonoBehaviour
 public enum GameState {
     MenuState,
     GameState,
-    EndState
+    PauseState
 }

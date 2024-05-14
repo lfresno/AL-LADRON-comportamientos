@@ -6,27 +6,22 @@ public class CameraController : MonoBehaviour
 {
     public GameObject player;
     private Vector3 distanceToPlayer;
-
     private bool lookingBack = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         distanceToPlayer = transform.position - player.transform.position;
     }
 
-    // Update is called once per frame
     void LateUpdate()
     {
         if(Input.GetKeyDown(KeyCode.Space) || lookingBack) {
             //if player presses Space, the camera will move a little further so that they can see the animals following
             transform.position = player.transform.position + distanceToPlayer + new Vector3(0, 2, -6);
             StartCoroutine(LookBack());
-
         } else {
             //camera will follow player 
             transform.position = player.transform.position + distanceToPlayer;
-
         }
     }
 

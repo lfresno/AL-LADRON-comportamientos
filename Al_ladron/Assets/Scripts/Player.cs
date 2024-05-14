@@ -22,11 +22,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Time.time - temp > 2.0f) {
-            life--;
-            temp = Time.time;
-            Debug.Log(life);
-        }
+        // if(Time.time - temp > 2.0f) {
+        //     life--;
+        //     temp = Time.time;
+        //     Debug.Log(life);
+        // }
     }
 
     public void ResetPlayer() {
