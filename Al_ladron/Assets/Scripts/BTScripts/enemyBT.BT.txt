@@ -1,0 +1,19 @@
+tree("Root")
+	tree("level1")
+
+tree("level1")
+	fallback
+		sequence
+			isPlayerLooking
+			tree("hide")
+		sequence	
+			isPlayerCloserThan 1.5
+			Steal
+		Chase
+
+tree("hide")
+	fallback
+		sequence
+			isObstacleCloserThan 4.0
+			HideObstacle
+		HideInvisible
