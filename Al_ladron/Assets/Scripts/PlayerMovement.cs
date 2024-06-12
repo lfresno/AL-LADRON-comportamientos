@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     
     [SerializeField]
     private float playerSpeed = 2.0f;
-    private float speedIncrement = 1.0f;
+    public float speedIncrement = 1.0f;
     private float lastIncrement;
     private int playerTrack = 0;    //there are 4 tracks (0-3) in which the player can choose to run
     public bool lookingBack = false;
