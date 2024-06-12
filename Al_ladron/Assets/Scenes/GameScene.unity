@@ -963,7 +963,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1927584237817733881, guid: 74f8afbd207bef84ab76779888f8b336, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -183.6
+      value: -180
       objectReference: {fileID: 0}
     - target: {fileID: 1927584237817733881, guid: 74f8afbd207bef84ab76779888f8b336, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7875,13 +7875,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1601186721133988836, guid: fb9d95536d09437429ab81ac6455214c, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2920603150157453589, guid: fb9d95536d09437429ab81ac6455214c, type: 3}
       propertyPath: m_Radius
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2920603150157453589, guid: fb9d95536d09437429ab81ac6455214c, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3784693738651478615, guid: fb9d95536d09437429ab81ac6455214c, type: 3}
       propertyPath: m_Name
@@ -7961,6 +7965,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 801803130}
   playerMovement: {fileID: 0}
+  material: {fileID: 0}
 --- !u!114 &5765059108961253268
 MonoBehaviour:
   m_ObjectHideFlags: 0
