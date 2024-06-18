@@ -30,7 +30,6 @@ public class UIManager : MonoBehaviour
 
 
     public void StartPressed() {
-        Debug.Log("empezamooo");
         GameManager.Instance.UpdateGameState(GameState.GameState);
     }
 

@@ -30,7 +30,7 @@ public class FSMBehaviour : MonoBehaviour
 
         switch(state) {
             case State.Chase:
-                Debug.Log("CHASE + " + distanceToPlayer.z);
+                // Debug.Log("CHASE + " + distanceToPlayer.z);
 
                 //if enemy is close enough, changes to STEAL state 
                 if(Mathf.Abs(distanceToPlayer.z) <= 4.5f) { 
@@ -52,7 +52,7 @@ public class FSMBehaviour : MonoBehaviour
                 break;
 
             case State.Steal:
-                Debug.Log("STEAL");
+                // Debug.Log("STEAL");
 
                 //finished stealing, comes back to initial distance and changes to CHASE state
                 if(Mathf.Abs(distanceToPlayer.z) <= 0.2f) {
@@ -68,7 +68,7 @@ public class FSMBehaviour : MonoBehaviour
                 break;
 
             case State.Hide:
-                Debug.Log("HIDE");
+                // Debug.Log("HIDE");
 
                 //finished hiding, comes back to initial distance and changes to CHASE state
                 if(!playerMovement.lookingBack) {

@@ -7,7 +7,7 @@ tree("level1")
 			isPlayerLooking
 			tree("hide")
 		sequence	
-			isPlayerCloserThan 1.5
+			isPlayerCloserThan 4.5
 			Steal
 		Chase
 

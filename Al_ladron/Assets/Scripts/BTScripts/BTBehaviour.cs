@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Panda;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+
+using Panda;
 
 public class BTBehaviour : MonoBehaviour
 {
     //I'm using PandaBT to create the BT logic
     //this script is used to define the actions that each node must do. 
+    PandaBehaviour pandaBT;
 
     //Player
     public GameObject player;
@@ -25,14 +27,24 @@ public class BTBehaviour : MonoBehaviour
     private Vector3 distanceToObstacle;
 
     [SerializeField] private Material material;
+    private Color initialColor;
 
     void Start()
     {
+
+        pandaBT = GetComponent<PandaBehaviour>();
+
         distanceToPlayer0 = transform.position - player.transform.position;
         distanceToPlayer = distanceToPlayer0;
         playerMovement = player.GetComponent<PlayerMovement>();
 
-        material = this.gameObject.GetComponent<Material>();
+        material = this.gameObject.GetComponent<Renderer>().material;
+        initialColor = material.color;
+    }
+
+    void Update(){
+        pandaBT.Tick();
+        pandaBT.Reset();
     }
 
     //HIDING
@@ -47,6 +59,7 @@ public class BTBehaviour : MonoBehaviour
         //to check if there is any obstacle close enough, the collider of this object has been edited
         //to be able to reach the two adyacent tracks. If any colision is found, we will check if that 
         //obstacle is behind of the player, in which case, the enemy will hide behind it
+        if(obstacles.Count() == 0) return false;
         GameObject o = obstacles.Peek();
         Debug.Log("             POSICIÓN "+ o.transform.position);
 
@@ -56,6 +69,7 @@ public class BTBehaviour : MonoBehaviour
         {
             hidePos = o.transform.position;
             distanceToObstacle = hidePos - this.transform.position;
+            Debug.Log("A ESCONDERSEEEEEEEE");
             return true;
         }
 
@@ -108,16 +122,17 @@ public class BTBehaviour : MonoBehaviour
         {
             distanceToPlayer = distanceToPlayer0;
             transform.position = player.transform.position + distanceToPlayer;
+            material.SetColor("_Color", initialColor);
             return;
         }
 
         //the enemy will get more and more transparent
-        //TODO!! check if ths is working properly (use values 0-1 or 0-100?)
         if(material.color.a >= 0.3){
             Color old = material.color;
             float oldAlbedo = old.a;
             Color newColor = new Color(old.r, old.g, old.b, oldAlbedo-0.1f);
-            material.color = newColor;
+            material.SetColor("_Color", newColor);
+            //material.color = newColor;
         }
     }
 
@@ -149,7 +164,7 @@ public class BTBehaviour : MonoBehaviour
     //CHASING
     [Task]
     void Chase(){
-        //Debug.Log("BT chase " + distanceToPlayer.z);
+        Debug.Log("BT chase " + distanceToPlayer.z);
 
         //enemy gets progrisevely closer to the player
         distanceToPlayer = distanceToPlayer + (new Vector3(0, 0, 0.01f));

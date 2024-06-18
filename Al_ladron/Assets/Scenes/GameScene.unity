@@ -7965,7 +7965,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 801803130}
   playerMovement: {fileID: 0}
-  material: {fileID: 0}
+  material: {fileID: 2100000, guid: 9e75222da78e5dd4a9edfebd2ba7e147, type: 2}
 --- !u!114 &5765059108961253268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8119,7 +8119,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8831740319121282484, guid: fe573787a3339c94e8974560ae7cd9c5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

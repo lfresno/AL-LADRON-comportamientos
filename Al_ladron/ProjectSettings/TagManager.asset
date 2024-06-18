@@ -6,6 +6,7 @@ TagManager:
   tags:
   - EnemyFSM
   - Obstacle
+  - EnemyBT
   layers:
   - Default
   - TransparentFX
