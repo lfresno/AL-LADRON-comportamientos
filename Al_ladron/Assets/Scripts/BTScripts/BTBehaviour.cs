@@ -43,6 +43,8 @@ public class BTBehaviour : MonoBehaviour
     }
 
     void Update(){
+        if(GameManager.Instance.State != GameState.GameState)  return;
+
         pandaBT.Tick();
         pandaBT.Reset();
     }
@@ -65,7 +67,7 @@ public class BTBehaviour : MonoBehaviour
 
         //the enemy won't be able to ide behind an obstacle ahead of the player or an obstacle too far away
         //we check this condition and store the position of the closest obstacle that succeeds in it
-        if ((o.transform.position.z < player.transform.position.z) && (Mathf.Abs(o.transform.position.z - this.transform.position.z) < 8.0f))
+        if ((o.transform.position.z < player.transform.position.z) && (Mathf.Abs(o.transform.position.z - this.transform.position.z) < 50.0f))
         {
             hidePos = o.transform.position;
             distanceToObstacle = hidePos - this.transform.position;
@@ -74,7 +76,7 @@ public class BTBehaviour : MonoBehaviour
         }
 
         GameObject o2 = obstacles.ElementAt<GameObject>(1);
-        if ((o2.transform.position.z < player.transform.position.z) && (Mathf.Abs(o2.transform.position.z - this.transform.position.z) < 8.0f))
+        if ((o2.transform.position.z < player.transform.position.z) && (Mathf.Abs(o2.transform.position.z - this.transform.position.z) < 50.0f))
         {
             hidePos = o.transform.position;
             distanceToObstacle = hidePos - this.transform.position;
@@ -82,7 +84,7 @@ public class BTBehaviour : MonoBehaviour
         }
 
         GameObject o3 = obstacles.ElementAt<GameObject>(1);
-        if ((o3.transform.position.z < player.transform.position.z) && (Mathf.Abs(o3.transform.position.z - this.transform.position.z) < 8.0f))
+        if ((o3.transform.position.z < player.transform.position.z) && (Mathf.Abs(o3.transform.position.z - this.transform.position.z) < 50.0f))
         {
             hidePos = o.transform.position;
             distanceToObstacle = hidePos - this.transform.position;
@@ -95,6 +97,7 @@ public class BTBehaviour : MonoBehaviour
     [Task]
     void HideObstacle()
     {    //hide behind an obstacle
+        if(GameManager.Instance.State != GameState.GameState)  return;
 
         //finished hiding, comes back to initial distance from player 
         if(!playerMovement.lookingBack){
@@ -116,6 +119,7 @@ public class BTBehaviour : MonoBehaviour
     [Task]
     void HideInvisible()
     {   //hide by making invisible
+        if(GameManager.Instance.State != GameState.GameState)  return;
 
         //finished hiding, comes back to initial distance from player 
         if (!playerMovement.lookingBack)
@@ -130,7 +134,7 @@ public class BTBehaviour : MonoBehaviour
         if(material.color.a >= 0.3){
             Color old = material.color;
             float oldAlbedo = old.a;
-            Color newColor = new Color(old.r, old.g, old.b, oldAlbedo-0.1f);
+            Color newColor = new Color(old.r, old.g, old.b, oldAlbedo-0.2f);
             material.SetColor("_Color", newColor);
             //material.color = newColor;
         }
@@ -145,6 +149,8 @@ public class BTBehaviour : MonoBehaviour
     [Task]
     void Steal()
     {
+        if(GameManager.Instance.State != GameState.GameState)  return;
+
         Debug.Log("BT steal");
 
         //finished stealing, comes back to initial distance 
@@ -164,6 +170,8 @@ public class BTBehaviour : MonoBehaviour
     //CHASING
     [Task]
     void Chase(){
+        if(GameManager.Instance.State != GameState.GameState)  return;
+
         Debug.Log("BT chase " + distanceToPlayer.z);
 
         //enemy gets progrisevely closer to the player
