@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 using Panda;
+using System;
 //using System.Numerics;
 
 public class BTBehaviour : MonoBehaviour
@@ -24,6 +25,7 @@ public class BTBehaviour : MonoBehaviour
     //in this case, a queue is better option than an array, so that the elements that colided first can be
     //removed easily
     private Queue<GameObject> obstacles = new Queue<GameObject>();
+    private Stack<GameObject> obstaclesStack = new Stack<GameObject>();
     private Vector3 hidePos;
     private Vector3 distanceToObstacle;
 
@@ -57,7 +59,38 @@ public class BTBehaviour : MonoBehaviour
     }
 
     [Task]
-    bool isObstacleCloserThan( float num){  //check if there is any obstacle close
+    bool isObstacleCloserThan(float num){  //check if there is any obstacle close
+
+        //STACK
+        if(obstaclesStack.Count() == 0) return false;
+
+        GameObject obsStack1 = obstaclesStack.Pop();
+        if((obsStack1.transform.position.z < player.transform.position.z) && (Math.Abs(obsStack1.transform.position.z - player.transform.position.z) < 40.0f)) {
+            hidePos = obsStack1.transform.position;
+            distanceToObstacle = hidePos - this.transform.position;
+            Debug.Log("A ESCONDERSEEEEEEEE");
+            return true;
+        }
+
+        if(obstaclesStack.Count() == 0) {
+            obstaclesStack.Push(obsStack1);
+            return false;
+        }
+
+        GameObject obsStack2 = obstaclesStack.Pop();
+        if((obsStack2.transform.position.z < player.transform.position.z) && (Math.Abs(obsStack2.transform.position.z - player.transform.position.z) < 40.0f)) {
+            hidePos = obsStack2.transform.position;
+            distanceToObstacle = hidePos - this.transform.position;
+            Debug.Log("A ESCONDERSEEEEEEEE");
+            return true;
+        }
+
+        obstaclesStack.Push(obsStack2);
+        obstaclesStack.Push(obsStack1);
+        return false;
+
+        /*
+        //QUEUE
 
         //to check if there is any obstacle close enough, the collider of this object has been edited
         //to be able to reach the two adyacent tracks. If any colision is found, we will check if that 
@@ -84,7 +117,7 @@ public class BTBehaviour : MonoBehaviour
             return true;
         }
 
-        GameObject o3 = obstacles.ElementAt<GameObject>(1);
+        GameObject o3 = obstacles.ElementAt<GameObject>(2);
         if ((o3.transform.position.z < player.transform.position.z) && (Mathf.Abs(o3.transform.position.z - this.transform.position.z) < 50.0f))
         {
             hidePos = o.transform.position;
@@ -93,6 +126,7 @@ public class BTBehaviour : MonoBehaviour
         }
 
         return false;
+        */
     }
 
     [Task]
@@ -108,15 +142,17 @@ public class BTBehaviour : MonoBehaviour
         }
 
         //hide
-        if (Mathf.Abs(distanceToObstacle.z) >= 0.2f) 
-        {
+        // if (Mathf.Abs(distanceToObstacle.z) >= 0.2f) 
+        // {
             Debug.Log("ESCONDERSE YAAAAA");
+
+            transform.position = hidePos + new Vector3(0, 0, -2.0f);
 
             // transform.position = Vector3.MoveTowards(transform.position, hidePos, 15.0f*Time.deltaTime);
 
-            distanceToObstacle = distanceToObstacle + new Vector3(0, 0, 0.1f);
-            transform.position = player.transform.position + distanceToObstacle;
-        }
+            // distanceToObstacle = distanceToObstacle + new Vector3(0, 0, 0.1f);
+            // transform.position = player.transform.position + distanceToObstacle;
+        // }
         //reached position, wait until player stops looking Back
 
     }
@@ -125,6 +161,8 @@ public class BTBehaviour : MonoBehaviour
     void HideInvisible()
     {   //hide by making invisible
         if(GameManager.Instance.State != GameState.GameState)  return;
+
+        Debug.Log("Me hago INVISIBLE");
 
         //finished hiding, comes back to initial distance from player 
         if (!playerMovement.lookingBack)
@@ -177,7 +215,7 @@ public class BTBehaviour : MonoBehaviour
     void Chase(){
         if(GameManager.Instance.State != GameState.GameState)  return;
 
-        Debug.Log("BT chase " + distanceToPlayer.z);
+        //Debug.Log("BT chase " + distanceToPlayer.z);
 
         //enemy gets progrisevely closer to the player
         distanceToPlayer = distanceToPlayer + (new Vector3(0, 0, 0.01f));
@@ -193,10 +231,15 @@ public class BTBehaviour : MonoBehaviour
 
         Debug.Log("ME CHOCO CON  " + collision.gameObject.name);
         //we only want to know the 3 last collisions
-        if(obstacles.Count > 3){
-            obstacles.Dequeue();
-        }
-        obstacles.Enqueue(collision.gameObject);
+
+        //QUEUE
+        // if(obstacles.Count > 3){
+        //     obstacles.Dequeue();
+        // }
+        // obstacles.Enqueue(collision.gameObject);
+
+        //STACK
+        obstaclesStack.Push(collision.gameObject);
     }
 
     void OnCollisionEnter(Collision collider) { //no lo pilla
