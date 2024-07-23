@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 using Panda;
+//using System.Numerics;
 
 public class BTBehaviour : MonoBehaviour
 {
@@ -107,8 +108,12 @@ public class BTBehaviour : MonoBehaviour
         }
 
         //hide
-        if (Mathf.Abs(distanceToObstacle.z) >= 0.2f)
+        if (Mathf.Abs(distanceToObstacle.z) >= 0.2f) 
         {
+            Debug.Log("ESCONDERSE YAAAAA");
+
+            // transform.position = Vector3.MoveTowards(transform.position, hidePos, 15.0f*Time.deltaTime);
+
             distanceToObstacle = distanceToObstacle + new Vector3(0, 0, 0.1f);
             transform.position = player.transform.position + distanceToObstacle;
         }
