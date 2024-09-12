@@ -4,18 +4,18 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
-public class FSMBehaviour : MonoBehaviour
+public class FSMBehaviour : NPCBase
 {
     //Player
-    public GameObject player;
-    public PlayerMovement playerMovement;
-    private Vector3 distanceToPlayer0;
-    private Vector3 distanceToPlayer;
+    // public GameObject player;
+    // public PlayerMovement playerMovement;
+    // private Vector3 distanceToPlayer0;
+    // private Vector3 distanceToPlayer;
 
     //FSM
     [SerializeField] private State state;
 
-    void Start()
+    public override void Start()
     {
         distanceToPlayer0 = transform.position - player.transform.position;
         distanceToPlayer = distanceToPlayer0;
@@ -24,7 +24,7 @@ public class FSMBehaviour : MonoBehaviour
         state = State.Chase;
     }
 
-    void Update()
+    public override void Update()
     {
         if(GameManager.Instance.State != GameState.GameState)  return;
 

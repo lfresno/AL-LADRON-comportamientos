@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,8 +17,22 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject endCanvas;
     [SerializeField] private Button restartButton, quitButton;
 
+    //In Game
+    [SerializeField] private TMP_Text npcText;
+    [SerializeField] private GameObject enemyFSM;
+    private FSMenemy fsmBehaviour;
+    private NPCState fsmState;
+
     void Awake(){
         Instance = this;
+    }
+
+    void Start() {
+        fsmBehaviour = enemyFSM.GetComponent<FSMenemy>();
+    }
+
+    void Update() {
+        npcText.SetText("FSM Enemy: " + fsmBehaviour.npcCurrent.ToString());
     }
 
     public void MenuActive( bool active) {
