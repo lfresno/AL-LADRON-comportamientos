@@ -108,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
         }
         
         Time.timeScale = 1.0f;
-        Debug.Log("player finished looking back");
+//        Debug.Log("player finished looking back");
         lookingBack = false;
         yield break;
     }

@@ -1,0 +1,12 @@
+tree("Root")
+	tree("level1")
+
+tree("level1")
+	fallback
+		sequence
+			checkPlayerLooking
+			HideBT
+		sequence	
+			checkPlayerClose
+			StealBT
+		ChaseBT
