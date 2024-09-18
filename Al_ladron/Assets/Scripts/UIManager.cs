@@ -25,8 +25,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject enemyUS;
     private USenemy usBehaviour;
 
-    // [SerializeField] private GameObject enemyBT;
-    // private BTenemy btBehaviour;
+    [SerializeField] private GameObject enemyBT;
+    private BTenemy btBehaviour;
 
 
     void Awake(){
@@ -36,11 +36,11 @@ public class UIManager : MonoBehaviour
     void Start() {
         fsmBehaviour = enemyFSM.GetComponent<FSMenemy>();
         usBehaviour = enemyUS.GetComponent<USenemy>();
-        //btBehaviour = enemyBT.GetComponent<BTenemy>();
+        btBehaviour = enemyBT.GetComponent<BTenemy>();
     }
 
     void Update() {
-        npcText.SetText("FSM Enemy: " + fsmBehaviour.npcCurrent.ToString() + "\n US Enemy: " + usBehaviour.npcCurrent.ToString() /*+ "\n BT Enemy: " + btBehaviour.npcCurrent.ToString()*/);
+        npcText.SetText("FSM Enemy: " + fsmBehaviour.npcCurrent.ToString() + "\n US Enemy: " + usBehaviour.npcCurrent.ToString() + "\n BT Enemy: " + btBehaviour.npcCurrent.ToString());
     }
 
     public void MenuActive( bool active) {

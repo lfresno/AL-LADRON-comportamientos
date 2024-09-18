@@ -2900,6 +2900,7 @@ MonoBehaviour:
   npcText: {fileID: 1271036416}
   enemyFSM: {fileID: 1238126023}
   enemyUS: {fileID: 1339641933}
+  enemyBT: {fileID: 712981457}
 --- !u!4 &676308629
 Transform:
   m_ObjectHideFlags: 0
@@ -3136,6 +3137,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &712981457 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3784693738651478615, guid: fb9d95536d09437429ab81ac6455214c, type: 3}
+  m_PrefabInstance: {fileID: 5765059108961253265}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &745832920
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8340,7 +8346,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3784693738651478615, guid: fb9d95536d09437429ab81ac6455214c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4264996202519249160, guid: fb9d95536d09437429ab81ac6455214c, type: 3}
       propertyPath: player

@@ -102,7 +102,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
@@ -120,3 +120,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c02ab3f1e4a9e74da514ce8ebaf0256, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcCurrent: 0
+  player: {fileID: 0}
+  playerMovement: {fileID: 0}
+  distanceToPlayer0: {x: 0, y: 0, z: 0}
+  distanceToPlayer: {x: 0, y: 0, z: 0}
+  stealingUtility: 0
+  chasingUtility: 0
+  hidingingUtility: 0
