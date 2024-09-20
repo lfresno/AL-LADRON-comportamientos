@@ -8,11 +8,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
     public GameState State;
-
-    //[SerializeField] private GameObject playerObj;
     private Player player;
-    private FSMBehaviour enemyFSM;
-    private BTBehaviour enemyBT;
 
     void Awake()  {
         Instance = this;
@@ -23,8 +19,6 @@ public class GameManager : MonoBehaviour
     {
         UpdateGameState(GameState.MenuState);
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        enemyFSM = GameObject.FindGameObjectWithTag("EnemyFSM").GetComponent<FSMBehaviour>();
-        enemyBT = GameObject.FindGameObjectWithTag("EnemyBT").GetComponent<BTBehaviour>();
     }
 
     // Update is called once per frame

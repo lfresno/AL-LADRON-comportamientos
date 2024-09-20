@@ -13,7 +13,6 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        life = maxLife;
         temp = Time.time;
         initialPosition = this.transform.position;
         Debug.Log(initialPosition);
@@ -22,15 +21,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if(Time.time - temp > 2.0f) {
-        //     life--;
-        //     temp = Time.time;
-        //     Debug.Log(life);
-        // }
+        if(GameManager.Instance.State != GameState.GameState) return;
     }
 
     public void ResetPlayer() {
-        life = maxLife;
         gameObject.transform.position = initialPosition;
     }
 }

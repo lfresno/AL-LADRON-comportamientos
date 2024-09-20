@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {   
+        if(GameManager.Instance.State != GameState.GameState) return;
+        
         //if player reaches the end of the created path, they will be redirected to the beggining 
         //this is only used in the prototype to test NPCs, but not in the final game
         if(gameObject.transform.position.z >= 1400) {
@@ -64,7 +66,6 @@ public class PlayerMovement : MonoBehaviour
                 if (playerTrack < 3)
                 {
                     controller.Move(new Vector3(5.0f, 0, 0));
-                    // gameObject.transform.position = new Vector3(playerTrack * 5, gameObject.transform.position.y, gameObject.transform.position.z);
                     playerTrack++;
                 }
 
@@ -74,7 +75,6 @@ public class PlayerMovement : MonoBehaviour
                 if (playerTrack > 0)
                 {
                     controller.Move(new Vector3(-5.0f, 0, 0));
-                    // gameObject.transform.position = new Vector3(playerTrack * 5, gameObject.transform.position.y, gameObject.transform.position.z);
                     playerTrack--;
                 }
 
@@ -90,12 +90,6 @@ public class PlayerMovement : MonoBehaviour
         {
             gameObject.transform.forward = move;
         }
-
-        //if player couldn't move properly between tracks and ends up between two of them, move them to the one they were before
-        if(gameObject.transform.position.x % 5 != 0) {
-            //TODO!
-        }
-
     }
 
     private IEnumerator LookBack() {       
@@ -108,7 +102,6 @@ public class PlayerMovement : MonoBehaviour
         }
         
         Time.timeScale = 1.0f;
-//        Debug.Log("player finished looking back");
         lookingBack = false;
         yield break;
     }

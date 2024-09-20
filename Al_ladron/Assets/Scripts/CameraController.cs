@@ -17,6 +17,8 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
+        if(GameManager.Instance.State != GameState.GameState) return;
+        
         if (Input.GetKeyDown(KeyCode.Space) || playerMovement.lookingBack)
         {
             //if player presses Space, the camera will move a little further so that they can see the animals following
