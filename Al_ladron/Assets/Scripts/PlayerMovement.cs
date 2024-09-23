@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //code source : https://docs.unity3d.com/ScriptReference/CharacterController.Move.html 
-
     private CharacterController controller;
     
     [SerializeField]
@@ -28,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
         
         //if player reaches the end of the created path, they will be redirected to the beggining 
         //this is only used in the prototype to test NPCs, but not in the final game
-        if(gameObject.transform.position.z >= 1400) {
+        if(gameObject.transform.position.z >= 2022.2) {
             controller.Move(new Vector3(0, 0, -1000.0f));
         }
 
