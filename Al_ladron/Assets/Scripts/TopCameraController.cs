@@ -30,19 +30,4 @@ public class TopCameraController : MonoBehaviour
         }
     }
 
-    // private IEnumerator LookBack() {
-    //     lookingBack = true;
-    //     float t = Time.realtimeSinceStartup;
-    //     Time.timeScale = 0f;
-
-    //     while(Time.realtimeSinceStartup - t < 3.0f){
-    //         yield return 0;
-    //     }
-        
-    //     Time.timeScale = 1.0f;
-    //     Debug.Log("finished coroutine camera");
-    //     lookingBack = false;
-    //     yield break;
-    // }
-
 }

@@ -5,8 +5,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    public int maxLife = 3;
-    public int life;
     private float temp;
     private Vector3 initialPosition;
 
